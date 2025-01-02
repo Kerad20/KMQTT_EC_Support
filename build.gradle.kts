@@ -18,6 +18,6 @@ plugins {
 }
 
 subprojects {
-    group = "io.github.davidepianca98"
-    version = "1.0.0"
+    group = "com.github.Kerad20"
+    version = "1.0.1"
 }
