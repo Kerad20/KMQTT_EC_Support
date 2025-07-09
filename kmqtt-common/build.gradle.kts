@@ -93,12 +93,6 @@ kotlin {
                 implementation(files("src/nativeInterop/openssl-ios-x64.klib"))
             }
         }
-        val iosArm64Main by getting {
-            dependsOn(posixMain)
-            dependencies {
-                implementation(files("src/nativeInterop/openssl-ios-arm64.klib"))
-            }
-        }
         val iosSimulatorArm64Main by getting {
             dependsOn(posixMain)
             dependencies {
