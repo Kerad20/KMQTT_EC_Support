@@ -179,3 +179,7 @@ publishing {
         }
     }
 }
+
+tasks.withType<Sign>().configureEach {
+    enabled = false
+}
