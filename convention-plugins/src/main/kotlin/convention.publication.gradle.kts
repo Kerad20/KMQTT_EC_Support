@@ -42,13 +42,23 @@ fun getExtraString(name: String) = ext[name]?.toString()
 
 publishing {
     // Configure maven central repository
+//    repositories {
+//        maven {
+//            name = "sonatype"
+//            setUrl("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+//            credentials {
+//                username = getExtraString("ossrhUsername")
+//                password = getExtraString("ossrhPassword")
+//            }
+//        }
+//    }
     repositories {
         maven {
-            name = "sonatype"
-            setUrl("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/Kerad20/KMQTT_EC_Support")
             credentials {
-                username = getExtraString("ossrhUsername")
-                password = getExtraString("ossrhPassword")
+                username = project.findProperty("gpr.user") as String? ?: System.getenv("GPR_USER")
+                password = project.findProperty("gpr.key") as String? ?: System.getenv("GPR_TOKEN")
             }
         }
     }
@@ -60,9 +70,9 @@ publishing {
 
         // Provide artifacts information requited by Maven Central
         pom {
-            name.set("KMQTT")
-            description.set("Kotlin Multiplatform MQTT client & embeddable and standalone broker")
-            url.set("https://github.com/davidepianca98/KMQTT")
+            name.set("KMQTT_EC_Support")
+            description.set("Kotlin Multiplatform MQTT client")
+            url.set("https://maven.pkg.github.com/Kerad20/KMQTT_EC_Support")
 
             licenses {
                 license {
@@ -78,13 +88,13 @@ publishing {
                 }
             }
             scm {
-                url.set("https://github.com/davidepianca98/KMQTT")
+                url.set("https://github.com/Kerad20/KMQTT_EC_Support")
             }
         }
     }
 }
 
 // Signing artifacts. Signing.* extra properties values will be used
-signing {
-    sign(publishing.publications)
-}
+//signing {
+//    sign(publishing.publications)
+//}

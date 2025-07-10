@@ -11,25 +11,9 @@ kotlin {
             kotlinOptions.jvmTarget = "1.8"
         }
     }
-    js {
-        nodejs {
-            binaries.executable()
-        }
-    }
-    mingwX64 {}
-    linuxX64 {}
-    linuxArm64 {}
+
     iosX64 {}
-    iosSimulatorArm64 {}
-    macosX64 {}
-    macosArm64 {}
-    tvosX64 {}
-    tvosSimulatorArm64 {}
-    tvosArm64 {}
-    watchosArm32 {}
-    watchosArm64 {}
-    watchosSimulatorArm64 {}
-    watchosX64 {}
+    iosArm64 {}
 
     sourceSets {
         all {
@@ -58,62 +42,18 @@ kotlin {
                 implementation(kotlin("test-junit"))
             }
         }
-        val jsMain by getting {
-            dependencies {
-                implementation(libs.kotlin.node)
-            }
-        }
-        val jsTest by getting {
-            dependencies {
-                implementation(kotlin("test-js"))
-            }
-        }
+
         val posixMain by creating {
             dependsOn(commonMain)
             dependencies {
                 implementation(libs.atomicfu)
             }
         }
-        val mingwX64Main by getting {
-            dependsOn(posixMain)
-        }
-        val linuxX64Main by getting {
-            dependsOn(posixMain)
-        }
-        val linuxArm64Main by getting {
-            dependsOn(posixMain)
-        }
+
         val iosX64Main by getting {
             dependsOn(posixMain)
         }
-        val iosSimulatorArm64Main by getting {
-            dependsOn(posixMain)
-        }
-        val macosX64Main by getting {
-            dependsOn(posixMain)
-        }
-        val macosArm64Main by getting {
-            dependsOn(posixMain)
-        }
-        val tvosX64Main by getting {
-            dependsOn(posixMain)
-        }
-        val tvosArm64Main by getting {
-            dependsOn(posixMain)
-        }
-        val tvosSimulatorArm64Main by getting {
-            dependsOn(posixMain)
-        }
-        val watchosX64Main by getting {
-            dependsOn(posixMain)
-        }
-        val watchosArm32Main by getting {
-            dependsOn(posixMain)
-        }
-        val watchosArm64Main by getting {
-            dependsOn(posixMain)
-        }
-        val watchosSimulatorArm64Main by getting {
+        val iosArm64Main by getting {
             dependsOn(posixMain)
         }
     }
@@ -125,16 +65,19 @@ tasks.withType<AbstractPublishToMaven>().configureEach {
     val signingTasks = tasks.withType<Sign>()
     mustRunAfter(signingTasks)
 }
-
-publishing {
-    repositories {
-        maven {
-            name = "github"
-            url = uri("https://maven.pkg.github.com/davidepianca98/KMQTT")
-            credentials(PasswordCredentials::class)
-        }
-    }
-}
+//
+//publishing {
+//    repositories {
+//        maven {
+//            name = "GitHubPackages"
+//            url = uri("https://maven.pkg.github.com/Kerad20/KMQTT_EC_Support")
+//            credentials {
+//                username = project.findProperty("gpr.user") as String? ?: System.getenv("GPR_USER")
+//                password = project.findProperty("gpr.key") as String? ?: System.getenv("GPR_TOKEN")
+//            }
+//        }
+//    }
+//}
 
 tasks.withType<Sign>().configureEach {
     enabled = false
